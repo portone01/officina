@@ -1,0 +1,45 @@
+create table clienti(
+id int(5) not null auto_increment primary key,
+nome varchar(30) not null,
+cognome varchar(30) not null,
+username varchar(30),
+password varchar(30),
+unique(username)); \W
+
+create table prodotti(
+id int(5) not null auto_increment primary key,
+nome varchar(30) not null,
+categoria varchar(30) not null,
+prezzo numeric(7,2) not null); \W
+
+create table veicoli(
+targa varchar(7) not null,
+marca varchar(30) not null,
+modello varchar(30),
+anno int(4) not null,
+idCliente int(5) not null,
+foreign key(idCliente) references clienti(id) on update cascade); \W
+
+create table operazioni(
+id int(5) not null auto_increment primary key,
+dataAcc date not null,
+dataPre date not null,
+dataRic date not null,
+targa varchar(7) not null,
+foreign key(targa) references veicoli(targa) on update cascade); \W
+
+create table interventi(
+id int(5) not null auto_increment primary key,
+tempo int(3) not null,
+tipo varchar(30) not null,
+idOperazione int(5) not null,
+targa varchar(7) not null,
+foreign key(idOperazione) references operazioni(id) on update cascade); \W
+
+create table utilizzi(
+idInt int(5) not null,
+idPro int(5) not null,
+quantita int(3) not null,
+primary key(idInt, idPro),
+foreign key(idInt) references interventi(id) on update cascade,
+foreign key(idPro) references prodotti(id) on update cascade); \W
