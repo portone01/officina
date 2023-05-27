@@ -12,6 +12,10 @@ ul {
 }
 .linea {
     float: right;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
 }
 
 .navbar {
@@ -20,6 +24,9 @@ ul {
     background-color: #292a73;
     text-align: center;
     padding: 14px 16px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
     text-decoration: none;
 }
 
@@ -45,7 +52,7 @@ ul {
 }
 .menu__btn {
     position: fixed;
-    top: 20px;
+    top: 50px;
     left: 20px;
     width: 26px;
     height: 26px;
@@ -59,7 +66,7 @@ ul {
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: #3e4491;
+    background-color: #fdd800;
     transition-duration: .25s;
 }
 .menu__btn > span::before {
@@ -87,7 +94,7 @@ ul {
 .menu__item {
     display: block;
     padding: 12px 24px;
-    color: #333;
+    color: #fdd800;
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: 600;

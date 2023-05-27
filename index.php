@@ -4,13 +4,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Officina Alfa</title>
-        <link rel="icon" href="Immagini/iconaSito.png" type="image/x-icon"/>
-        <link rel="shortcut icon" href="Immagini/iconaSito.png" type="image/x-icon"/>
-        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="immagini/iconaSito.png" type="image/x-icon"/>
+        <link rel="shortcut icon" href="immagini/iconaSito.png" type="image/x-icon"/>
+        <link rel="stylesheet" href="stile/style.css">
     </head>
     <body>
         <ul>
-            <div class="hamburger-menu">
+            <div class="hamburger-menu" >
                 <input id="menu__toggle" type="checkbox" />
                 <label class="menu__btn" for="menu__toggle">
                     <span></span>
@@ -24,8 +24,8 @@
                     <li><a class="menu__item" href="#">Contatti</a></li>
                 </ul>
             </div>
-            <li class="linea"><a class="navbar" href="accesso.php">Accedi</a></li>
-            <li class="linea"><a class="navbar" href="registrazione.php">Registrati</a></li>
+            <li class="linea"><a class="navbar" href="login/accesso.php">Accedi</a></li>
+            <li class="linea"><a class="navbar" href="login/registrazione.php">Registrati</a></li>
         </ul>
     </body>
 </html>
