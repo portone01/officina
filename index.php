@@ -9,8 +9,7 @@
         <link rel="stylesheet" href="stile/style.css">
     </head>
     <body>
-        <ul>
-            <div class="hamburger-menu" >
+        <div>
                 <input id="menu__toggle" type="checkbox" />
                 <label class="menu__btn" for="menu__toggle">
                     <span></span>
@@ -22,10 +21,10 @@
                     <li><a class="menu__item" href="#">Fotografie</a></li>
                     <li><a class="menu__item" href="#">Recensioni</a></li>
                     <li><a class="menu__item" href="#">Contatti</a></li>
+
                 </ul>
-            </div>
             <li class="linea"><a class="navbar" href="login/accesso.php">Accedi</a></li>
             <li class="linea"><a class="navbar" href="login/registrazione.php">Registrati</a></li>
-        </ul>
+        </div>
     </body>
 </html>
