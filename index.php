@@ -18,18 +18,18 @@
 
             <h1>Accesso</h1>
 
-            <form action="javascript:callFunction('Accedi')">
-                <label for="fname">Username:</label>
-                <input type="text" id="fname" name="fname"><br><br>
-                <label for="lname">Password:</label>
-                <input type="text" id="lname" name="lname"><br><br>
+            <form action="/action_page.php">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password"><br><br>
                 <input type="submit" value="Accedi">
             </form>
         </dialog>
 
         <div>
             <input id="menu__toggle" type="checkbox" />
-            <label class="menu__btn" for="menu__toggle">
+            <label class="menu_btn" for="menu_toggle">
                 <span></span>
             </label>
 
