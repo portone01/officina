@@ -27,9 +27,6 @@
             <input type="text" id="lname" name="lname"><br><br>
             <input type="submit" value="Accedi">
         </form>
-
-        <p>Click the "Submit" button and the form-data will be sent to a page on the
-            server called "action_page.php".</p>
     </dialog>
 
     <div>
