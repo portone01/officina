@@ -73,6 +73,7 @@
         </script>
 
         <input type="hidden" name="operation" >
+        ok
     </body>
 
 </html>
