@@ -41,16 +41,16 @@ class ClientiDao {
 //        }
 //        return $ret;
 //    }
-        public function accesso($username) {
+        public function accesso($username, $password) {
         $con = null;
         $rs = null;
         $bean = null;
         try {
             $con = $this->dbDao->getConnection();
 
-            $query = 'select password from clienti where username=?';
+            $query = 'select password from clienti where username=? and password=?';
             $stmt = $con->prepare($query);
-            $stmt->bind_param('s', $username);
+            $stmt->bind_param('ss', $username, $password);
             $stmt->execute();
             $rs = $stmt->get_result();
             if ($row = $rs->fetch_array()) {

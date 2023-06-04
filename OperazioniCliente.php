@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once("dao/ClientiDao.php");
@@ -9,27 +10,19 @@ $dao = new ClientiDao();
 
 $op = $_REQUEST["operation"];
 $username = $_REQUEST["username"];
+$password = $_REQUEST["password"];
 if ($op == "Registrati") {
-    $password = $_REQUEST["password"];
     $nome = $_REQUEST["nome"];
     $cognome = $_REQUEST["cognome"];
     $codFiscale = $_REQUEST["codFiscale"];
 }
 
 if ($op == "Accedi") {
-    $cliente = $dao->accesso($username);
+    $cliente = $dao->accesso($username, $password);
     if ($cliente != null) {
         $_SESSION['username'] = $username;
         header("location:areaPersonale.html");
     } else {
-        ?>
-        <!DOCTYPE html>
-        <html>
-            <head></head>
-            <script language="javascript">'
-                alert("Nessun utente trovato con quello username, registrati")
-            </script></html>
-        <?php
         header("location:accesso.php");
     }
 }

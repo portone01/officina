@@ -49,8 +49,8 @@
                 </label>
                 <ul class="menu__box">
                     <li><a class="menu__item" href="#home">Home</a></li>
-                    <li><a class="menu__item" href="#luogo">Dove siamo</a></li>
                     <li><a class="menu__item" href="#foto">Fotografie</a></li>
+                    <li><a class="menu__item" href="#luogo">Dove siamo</a></li>
                     <li><a class="menu__item" href="#feedback">Recensioni</a></li>
                 </ul>
                 <!--<li class="linea"><a class="navbar" id="login-btn">Accedi</a></li>-->
@@ -122,7 +122,7 @@
                     }
                 </script>
             </section>
-            <section id="luogo" >
+            <section id="luogo" style=" left: 100%">
                 <iframe class="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2876.8785378801394!2d10.954671976682478!3d43.858346139137744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a6016846cec8d%3A0xb4324ca8ecc51059!2sPunto%20Gomme%20Quarrata%20Di%20Bottaccio%20Gerardo!5e0!3m2!1sit!2sit!4v1685715488714!5m2!1sit!2sit" allowfullscreen=""></iframe>
             </section>
             <section id="feedback">
