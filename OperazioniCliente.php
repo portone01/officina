@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+?>
+<?php
 
 require_once("dao/ClientiDao.php");
 
@@ -21,6 +23,8 @@ if ($op == "Accedi") {
     $cliente = $dao->accesso($username, $password);
     if ($cliente != null) {
         $_SESSION['username'] = $username;
+        $_SESSION['codFiscale'] = $cliente->getCodFiscale();
+//        die("valore = ". $_SESSION['codFiscale']);
         header("location:areaPersonale.html");
     } else {
         header("location:accesso.php");
@@ -29,7 +33,9 @@ if ($op == "Accedi") {
 
 if ($op == "Registrati") {
     $dao->insertCliente($username, $password, $nome, $cognome, $codFiscale);
-    $dao->accesso($username);
+    $cliente = $dao->accesso($username, $password);
+    $_SESSION['username'] = $username;
+    $_SESSION['codFiscale'] = $cliente->getCodFiscale();
     header("location:areaPersonale.html");
 }
 ?>

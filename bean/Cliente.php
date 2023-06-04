@@ -6,6 +6,7 @@ class Cliente {
 
     private $username;
     private $password;
+    private $codFiscale;
     
     public function getUsername() {
         return $this->username;
@@ -21,6 +22,14 @@ class Cliente {
 
     public function setPassword($password) {
         $this->password = $password;
+    }
+
+    public function getCodFiscale() {
+        return $this->codFiscale;
+    }
+
+    public function setCodFiscale($codFiscale) {
+        $this->codFiscale = $codFiscale;
     }
 
 

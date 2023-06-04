@@ -433,7 +433,14 @@ img.logo{
 .logo:hover {
   transform: scale(0.8);
 }
-
-.list{
-    
+.vociStorico {
+    font-size: h2;
+    font-family: 'Roboto', sans-serif;
+    color: #fdd800
+}
+.voceVeicolo {
+    font-size: h3;
+    font-family: 'Roboto', sans-serif;
+    color: #3a9efd;
+    font-weight: bold;
 }

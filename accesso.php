@@ -15,7 +15,6 @@ $dao = new ClientiDao();
     </head>
     <script>
         function Accedi() {
-            document.forms[0].operation.value = "Accedi";
             document.forms[0].action = "OperazioniCliente.php";
             document.forms[0].submit();
         }
