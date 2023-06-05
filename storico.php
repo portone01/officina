@@ -1,9 +1,5 @@
 <?php
-session_start();
-?>
-<?php
 require_once("dao/ClientiDao.php");
-
 
 use \dao\ClientiDao;
 
@@ -40,6 +36,5 @@ $results = $dao->findStorico($cf);
             }
             ?>
         </table>
-
     </body>
 </html>

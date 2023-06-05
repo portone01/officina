@@ -2,13 +2,17 @@
 
 namespace dao;
 
+session_start();
+
 require_once 'DbDao.php';
 require_once 'DaoException.php';
 require_once 'bean/Cliente.php';
 require_once 'bean/Veicolo.php';
+require_once 'bean/Operazione.php';
 
 use bean\Cliente;
 use bean\Veicolo;
+use bean\Operazione;
 
 class ClientiDao {
 
@@ -47,7 +51,6 @@ class ClientiDao {
     public function insertCliente($username, $password, $nome, $cognome, $codFiscale) {
         $con = null;
         $rs = null;
-        $bean = null;
         try {
             $con = $this->dbDao->getConnection();
 
@@ -90,11 +93,10 @@ class ClientiDao {
             if ($con->errno != 0) {
                 throw new DaoException($con->errno, $con->error);
             }
-            
+
             while ($row = $rs->fetch_array()) {
                 $lista[] = $this->createBeanVeicolo($row);
             }
-            
         } catch (DaoException $ex) {
             throw $ex;
         } catch (Exception $ex) {
@@ -105,7 +107,6 @@ class ClientiDao {
         return $lista;
     }
 
-
     private function createBeanVeicolo($row) {
         $vei = new Veicolo();
         $vei->setTarga($row["targa"]);
@@ -114,6 +115,44 @@ class ClientiDao {
         $vei->setAnno($row["anno"]);
         $vei->setcfCliente($row["cfCliente"]);
         return $vei;
+    }
+
+    public function findStato($targa) {
+        $con = null;
+        $ret = null;
+        try {
+            $con = $this->dbDao->getConnection();
+
+            $query = 'select * from operazioni where targa=?';
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("s", $targa);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            if ($row = $rs->fetch_array()) {
+                $bean = $this->createBeanOperazione($row);
+            }
+        } catch (DaoException $ex) {
+            throw $ex;
+        } catch (Exception $ex) {
+            throw new DaoException($ex->getCode(), $ex->getMessage());
+        } finally {
+            $rs->free();
+            $con->close();
+        }if ($bean != null) {
+            $_SESSION['stato'] = $bean->getStato();
+        }
+    }
+
+    private function createBeanOperazione($row) {
+        $oper = new Operazione();
+        $oper->setId($row["id"]);
+        $oper->setDataAcc($row["dataAcc"]);
+        $oper->setDataPre($row["dataPre"]);
+        $oper->setDataRic($row["dataRic"]);
+        $oper->setTarga($row["targa"]);
+        $oper->setStato($row["stato"]);
+
+        return $oper;
     }
 
 }
