@@ -26,7 +26,7 @@ CREATE TABLE `categorie` (
   `codice` int NOT NULL AUTO_INCREMENT,
   `descrizione` varchar(50) NOT NULL,
   PRIMARY KEY (`codice`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,7 +53,7 @@ CREATE TABLE `clienti` (
   `password` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`codFiscale`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +62,7 @@ CREATE TABLE `clienti` (
 
 LOCK TABLES `clienti` WRITE;
 /*!40000 ALTER TABLE `clienti` DISABLE KEYS */;
+INSERT INTO `clienti` VALUES ('CNTLSS04S02G713W','Alessio','Conte','portone01','passwored');
 /*!40000 ALTER TABLE `clienti` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,9 +78,11 @@ CREATE TABLE `interventi` (
   `idInt` int NOT NULL,
   `idOpe` int NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `idInt` (`idInt`),
   KEY `idOpe` (`idOpe`),
-  KEY `idInt` (`idInt`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `interventi_ibfk_1` FOREIGN KEY (`idInt`) REFERENCES `tipi_interventi` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `interventi_ibfk_2` FOREIGN KEY (`idOpe`) REFERENCES `operazioni` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,8 +109,9 @@ CREATE TABLE `operazioni` (
   `targa` varchar(7) NOT NULL,
   `stato` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `targa` (`targa`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `targa` (`targa`),
+  CONSTRAINT `operazioni_ibfk_1` FOREIGN KEY (`targa`) REFERENCES `veicoli` (`targa`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +120,7 @@ CREATE TABLE `operazioni` (
 
 LOCK TABLES `operazioni` WRITE;
 /*!40000 ALTER TABLE `operazioni` DISABLE KEYS */;
+INSERT INTO `operazioni` VALUES (1,'2022-02-22','2022-02-23','2022-02-24','AA000AA','IN RIPARAZIONE');
 /*!40000 ALTER TABLE `operazioni` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,8 +138,9 @@ CREATE TABLE `prodotti` (
   `prezzo` decimal(7,2) NOT NULL,
   `codCateg` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `codCateg` (`codCateg`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `codCateg` (`codCateg`),
+  CONSTRAINT `prodotti_ibfk_1` FOREIGN KEY (`codCateg`) REFERENCES `categorie` (`codice`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +164,7 @@ CREATE TABLE `tipi_interventi` (
   `nome` varchar(30) NOT NULL,
   `ore` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,8 +188,10 @@ CREATE TABLE `utilizzi` (
   `idPro` int NOT NULL,
   `quantita` int NOT NULL,
   PRIMARY KEY (`idOpe`,`idPro`),
-  KEY `idPro` (`idPro`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `idPro` (`idPro`),
+  CONSTRAINT `utilizzi_ibfk_1` FOREIGN KEY (`idOpe`) REFERENCES `operazioni` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `utilizzi_ibfk_2` FOREIGN KEY (`idPro`) REFERENCES `prodotti` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,9 +215,11 @@ CREATE TABLE `veicoli` (
   `marca` varchar(30) NOT NULL,
   `modello` varchar(30) DEFAULT NULL,
   `anno` int NOT NULL,
-  `cfCliente` int NOT NULL,
-  KEY `cfCliente` (`cfCliente`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `cfCliente` varchar(16) NOT NULL,
+  PRIMARY KEY (`targa`),
+  KEY `cfCliente` (`cfCliente`),
+  CONSTRAINT `veicoli_ibfk_1` FOREIGN KEY (`cfCliente`) REFERENCES `clienti` (`codFiscale`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,6 +228,7 @@ CREATE TABLE `veicoli` (
 
 LOCK TABLES `veicoli` WRITE;
 /*!40000 ALTER TABLE `veicoli` DISABLE KEYS */;
+INSERT INTO `veicoli` VALUES ('AA000AA','TOYOTA','SUPRA',1994,'CNTLSS04S02G713W');
 /*!40000 ALTER TABLE `veicoli` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -230,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-29 18:50:36
+-- Dump completed on 2023-06-05 12:37:27
